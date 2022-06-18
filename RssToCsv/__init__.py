@@ -60,19 +60,25 @@ def fetchRSSandOutputCSV(url):
     )
 
     csv_writer.writerow([
-        'Title',
-        'Link',
-        'Description',
-        'pubDate',
-        'guid']
+        'episodeTitle',
+        'episodeDescription',
+        'episodeLongdescription'
+        'episodeLength',
+        'fileURL',
+        'episodePubdate',
+        'episodeDuration',
+        'episodeGuid']
     )
 
     for item in rss.entries:
         csv_writer.writerow([
             item.get('title', 'No Title'),
-            item.get('link', ''),
-            item.get('summary', ''),
+            item.get('description', ''),
+            item.get('summary', '')
+            item.get('length', ''),
+            item.get('media:content url', ''),
             item.get('published', ''),
+            item.get('itunes:duration', ''),
             item.get('id', '')
         ])
 
