@@ -15,7 +15,6 @@ import os
 import re
 import requests
 import time
-from ..shared_code import utilities
 
 
 def fetchRSSandOutputCSV(url):
@@ -62,7 +61,7 @@ def fetchRSSandOutputCSV(url):
     csv_writer.writerow([
         'episodeTitle',
         'episodeDescription',
-        'episodeLongdescription'
+        'episodeLongdescription',
         'episodeLength',
         'fileURL',
         'episodePubdate',
@@ -74,7 +73,7 @@ def fetchRSSandOutputCSV(url):
         csv_writer.writerow([
             item.get('title', 'No Title'),
             item.get('description', ''),
-            item.get('summary', '')
+            item.get('summary', ''),
             item.get('length', ''),
             item.get('media:content url', ''),
             item.get('published', ''),
@@ -93,14 +92,14 @@ def main(context: func.Context, req: func.HttpRequest) -> func.HttpResponse:
     logging.info('HTTP trigger function processed a request, calling rss2csv')
     logging.info(f"invocation_id = {context.invocation_id}")
 
-    url = req.params.get('url')
+    url = req.params.get('https://django-bohren-k6yj.squarespace.com/comics-place-podcast?format=rss')
     if not url:
         try:
             req_body = req.get_json()
         except ValueError:
             pass
         else:
-            url = req_body.get('url')
+            url = req_body.get('https://django-bohren-k6yj.squarespace.com/comics-place-podcast?format=rss')
 
     url = url.strip()
     if url:
