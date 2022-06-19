@@ -92,14 +92,14 @@ def main(context: func.Context, req: func.HttpRequest) -> func.HttpResponse:
     logging.info('HTTP trigger function processed a request, calling rss2csv')
     logging.info(f"invocation_id = {context.invocation_id}")
 
-    url = req.params.get('https://django-bohren-k6yj.squarespace.com/comics-place-podcast?format=rss')
+    url = 'https://django-bohren-k6yj.squarespace.com/comics-place-podcast?format=rss'
     if not url:
         try:
             req_body = req.get_json()
         except ValueError:
             pass
         else:
-            url = req_body.get('https://django-bohren-k6yj.squarespace.com/comics-place-podcast?format=rss')
+            url = 'https://django-bohren-k6yj.squarespace.com/comics-place-podcast?format=rss'
 
     url = url.strip()
     if url:
